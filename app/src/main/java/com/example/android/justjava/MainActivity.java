@@ -27,6 +27,9 @@ import android.widget.Toast;
  */
 public class MainActivity extends AppCompatActivity {
 
+    // initialize the quantity of cups of coffee to
+    // 1 because why would you order 0 cups of coffee?
+    // 0 cups of coffee is lame
     int quantity = 1;
 
     // global variable that will hold the view for the
@@ -35,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
     CheckBox whippedBox;
     CheckBox chocolateBox;
     EditText cusName;
+
+    // used in onSaveInstanceState and onRestoreInstanceState
+    // so that there is no chance of typo when calling them
+    // in their respective methods within onSaveInstanceState
+    // and onRestoreInstanceState
+    private final String quantityKey = "quantity_string_key";
+    private final String quantityIntKey = "quantity_int_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +56,15 @@ public class MainActivity extends AppCompatActivity {
         // onRestoreInstanceState methods
         quantityTextView = findViewById(R.id.quantity_text_view);
 
-        // sets the background color to white
-        ScrollView sV = findViewById(R.id.scroll_layout);
-        sV.setBackgroundColor(Color.WHITE);
-
         // initializing views in onCreate for efficiency and
         // lessening CPU cycles
         whippedBox = findViewById(R.id.whipped_checkbox);
         chocolateBox = findViewById(R.id.chocolate_checkbox);
         cusName = findViewById(R.id.enter_name);
 
+        // sets the background color to white
+        ScrollView sV = findViewById(R.id.scroll_layout);
+        sV.setBackgroundColor(Color.WHITE);
     }
 
     /**
@@ -67,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // saves the value of the quantity string with key key_string
-        outState.putString("quantity_string_key", quantityTextView.getText().toString());
-        outState.putInt("quantity_int_key", quantity);
+        outState.putString(quantityKey, quantityTextView.getText().toString());
+        outState.putInt(quantityIntKey, quantity);
         super.onSaveInstanceState(outState);
     }
 
@@ -79,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        quantityTextView.setText(savedInstanceState.getString("quantity_string_key"));
-        quantity = savedInstanceState.getInt("quantity_int_key");
+        quantityTextView.setText(savedInstanceState.getString(quantityKey));
+        quantity = savedInstanceState.getInt(quantityIntKey);
 
     }
 
@@ -146,12 +155,12 @@ public class MainActivity extends AppCompatActivity {
         // base price of a drink
         int pricePerDrink = 5;
 
-        // add a dollar if adding whipped cream
+        // add a dollar if whipped cream box ticked
         if (addedWhippedCream()) {
             pricePerDrink += 1;
         }
 
-        // add a dollar if chocolate
+        // add two dollars if chocolate box ticked
         if (addedChocolate()) {
             pricePerDrink += 2;
         }
