@@ -4,6 +4,8 @@
  * package com.example.android.justjava
  * If you get an error when copying this code into Android studio, update it to match teh package name found
  * in the project's AndroidManifest.xml file.
+ * By: Christian Montecillo via Udacity Grow With Google Program:
+ * https://www.udacity.com/grow-with-google
  **/
 
 package com.example.android.justjava;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     // global variable that will hold the view for the
     // number of cups of coffee from activity_main.xml
     private TextView quantityTextView;
+    CheckBox whippedBox;
+    CheckBox chocolateBox;
+    EditText cusName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,14 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView = findViewById(R.id.quantity_text_view);
 
         // sets the background color to white
-        ScrollView sV= findViewById(R.id.scroll_layout);
+        ScrollView sV = findViewById(R.id.scroll_layout);
         sV.setBackgroundColor(Color.WHITE);
+
+        // initializing views in onCreate for efficiency and
+        // lessening CPU cycles
+        whippedBox = findViewById(R.id.whipped_checkbox);
+        chocolateBox = findViewById(R.id.chocolate_checkbox);
+        cusName = findViewById(R.id.enter_name);
 
     }
 
@@ -55,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("key_string", quantityTextView.getText().toString());
-        outState.putInt("quantity_string", quantity);
+        // saves the value of the quantity string with key key_string
+        outState.putString("quantity_string_key", quantityTextView.getText().toString());
+        outState.putInt("quantity_int_key", quantity);
         super.onSaveInstanceState(outState);
     }
 
@@ -67,20 +79,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        quantityTextView.setText(savedInstanceState.getString("key_string"));
-        quantity = savedInstanceState.getInt("quantity_string");
+        quantityTextView.setText(savedInstanceState.getString("quantity_string_key"));
+        quantity = savedInstanceState.getInt("quantity_int_key");
 
     }
 
     /**
      * This method is called when the order button is clicked.
-     *
      */
     public void submitOrder(View view) {
         // Intent opens the gmail app for emailing the order
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"afchristian@gmail.com"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"some_email@gmail.com"});
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.just_java_order));
         intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary());
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -95,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
         // only allow up to 100
         if (quantity < 10) {
             quantity++;
-        }
-        else {
+        } else {
             // Toast message: can't go above 100 cups of coffee!
             Toast.makeText(getApplicationContext(), getString(R.string.toast_100), Toast.LENGTH_LONG).show();
         }
@@ -105,15 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method is called when the decrement button is clicked.
-     * If/else used to make sure it doens't have negative cups of coffee
+     * If/else used to make sure it doesn't have negative cups of coffee
      */
     public void decrement(View view) {
         // this checks to make sure that decrementing the quantity variable
         // won't make it go negative (can't have negative cups of coffee)
         if (quantity > 1) {
             quantity--;
-        }
-        else {
+        } else {
             // Toast message: can't go below 1 cup of coffee!
             Toast.makeText(this, getString(R.string.toast_1), Toast.LENGTH_LONG).show();
         }
@@ -124,11 +133,13 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given quantity value on the screen.
      */
     private void displayQuantity(int quantityNumber) {
+        // show the quantity; have to use String.format
+        // because quantityNumber is an int but needs to be
+        // displayed as a String
         quantityTextView.setText(String.format("%d", quantityNumber));
     }
 
     /**
-     *
      * @return total price of order
      */
     private int calculatePrice() {
@@ -145,34 +156,32 @@ public class MainActivity extends AppCompatActivity {
             pricePerDrink += 2;
         }
 
+        // calculation for price to be paid
         return quantity * pricePerDrink;
     }
 
     /**
-     *
      * @return true if whipped cream checkbox checked, else false
      */
     public boolean addedWhippedCream() {
-        CheckBox whippedBox = findViewById(R.id.whipped_checkbox);
+        // whippedBox initialized in onCreate method
         return whippedBox.isChecked();
     }
 
     /**
-     *
      * @return true if chocolate checkbox checked, else false
      */
     public boolean addedChocolate() {
-        CheckBox chocolateBox = findViewById(R.id.chocolate_checkbox);
+        // chocolateBox initialized in onCreate method
         return chocolateBox.isChecked();
     }
 
     public String customerName() {
-        EditText cusName = findViewById(R.id.enter_name);
+        // EditText cusName = findViewById(R.id.enter_name);
         return cusName.getText().toString();
     }
 
     /**
-     *
      * @return string with summary of order
      */
     private String createOrderSummary() {
