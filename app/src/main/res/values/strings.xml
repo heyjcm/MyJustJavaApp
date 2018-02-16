@@ -1,0 +1,24 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Just Java</string>
+    <string name="quantity_header">How Many Cups of Coffee?</string>
+    <string name="cups_of_coffee">1</string>
+    <string name="order_button">Order</string>
+    <string name="price_header">Order Summary</string>
+    <string name="price">$0</string>
+    <string name="toppings_header">Toppings</string>
+    <string name="topping_1">Whipped cream</string>
+    <string name="topping_2">Chocolate</string>
+    <string name="name_input">What\'s your name?</string>
+
+    <!--Stuff for MainActivity.java-->
+    <string name="thank_you">Thank you!</string>
+    <string name="total_price">Total: $</string>
+    <string name="total_quantity">Quantity: </string>
+    <string name="get_chocolate">Add chocolate? </string>
+    <string name="get_whipped">Add whipped cream? </string>
+    <string name="customer_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string>
+    <string name="toast_100">Can\'t order more than a hundred cups of coffee!</string>
+    <string name="toast_1">Have to order at least one cup of coffee!</string>
+    <string name="just_java_order">Just Java Order</string>
+
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Solo Java</string>
+    <string name="thank_you">Gracias!</string>
+    <string name="total_price">El total: $</string>
+    <string name="quantity_header">"¿Cuántas tazas de café? "</string>
+    <string name="cups_of_coffee">1</string>
+    <string name="price_header">"Resumen de orden "</string>
+    <string name="order_button">Ordenar</string>
+    <string name="price">$0</string>
+    <string name="toppings_header">Coberturas</string>
+    <string name="topping_1">Crema batida</string>
+    <string name="topping_2">Chocolate</string>
+    <string name="name_input">"¿Cuál es su nombre? "</string>
+    <string name="total_quantity">"Cantidad "</string>
+    <string name="get_chocolate">"¿Pon el chocolate? "</string>
+    <string name="get_whipped">¿Pon la crema batida?</string>
+    <string name="toast_100">"¡No puede ordenar más de cien tazas de café! "</string>
+    <string name="toast_1">"¡Tiene que ordenar más de uno taza de café! "</string>
+    <string name="just_java_order">Solo Java Orden</string>
+    <string name="customer_name">Nombre: <xliff:g id="name" example="Amy">%s</xliff:g></string>
+</resources>
