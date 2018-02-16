@@ -93,24 +93,6 @@
                     android:onClick="submitOrder"
                     android:text="@string/order_button" />
 
-<!--                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/price_header"
-                    android:textAllCaps="true"
-                    android:textColor="#9E9E9E" />
-
-                <TextView
-                    android:id="@+id/order_summary_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/price"
-                    android:textColor="#000000"
-                    android:textSize="25sp" />-->
-
-
             </LinearLayout>
 
         </LinearLayout>
